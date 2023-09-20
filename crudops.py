@@ -1,15 +1,14 @@
 import mysql.connector
 import creds
 
-
 from mysql.connector import Error
-from sql import createDB_connection
+from sql import create_connection
 from sql import execute_query
 from sql import execute_read_query
 
 #create connection to mysql database and using the creds.py file with the creds funcion from creds file
-myCreds = creds.creds() 
-connection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
+myCreds = creds.Creds() 
+connection = create_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
 
 #CRUD - Create, Read, Update and Delete
 
