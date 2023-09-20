@@ -16,8 +16,8 @@ def createDB_connection(hostname, username, passwd, dbname):
         print('connection unsuccessful, error is : ', e)
     return connection
 
-# This function is used to execute query to update database (used for insert, update and delete statement)
-def execute_query(conn, query):
+''' This function is used to execute query to update database (used for insert, update and delete statement)
+#def execute_query(conn, query):
     cursor = conn.cursor()
     try:
         cursor.execute(query)
@@ -35,5 +35,5 @@ def execute_read_query(conn, query):
         rows = cursor.fetchall()
         return rows
     except Error as e:
-        print('Error occured is : ', e)
+        print('Error occured is : ', e)'''
 
