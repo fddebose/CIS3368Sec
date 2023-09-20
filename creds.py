@@ -1,6 +1,6 @@
-# You need to give your credentials here
-class Creds:
-    connectionstring = 'cis3368.c3avcm7sbvju.us-east-1.rds.amazonaws.com'
+# Create class for Creds giving the credetials to be used when connecting to database
+class creds:
+    connectionstring = 'cis3368class2db.cc6xz6ybkezq.us-east-1.rds.amazonaws.com'
     username = 'admin'
-    passwd = 'admin123'
-    dataBase = 'cis3368sp'
+    passwrd = 'mypassword'
+    dataBaseName = 'cis3368class2db'
