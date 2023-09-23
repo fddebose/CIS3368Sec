@@ -13,9 +13,9 @@ myCreds = creds.creds()
 myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
 
 #CRUD - Create, Read, Update and Delete
-
-
-#Do we need show each Insert statement for each entry into datab...........?????
+#Used W3Schools web site for iterating ober data, for loops, dictionaries
+#Used Geek for Geeks web sit for iteration and database
+#Used Giraffe Academy for sql and database
 
 #CRUD - Create, Read, Update and Delete
 #create a new entry into users table
