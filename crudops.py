@@ -1,22 +1,104 @@
 import mysql.connector
 import creds
 
+
 from mysql.connector import Error
-from sql import create_connection
+from sql import createDB_connection
 from sql import execute_query
 from sql import execute_read_query
 
+
 #create connection to mysql database and using the creds.py file with the creds funcion from creds file
-myCreds = creds.Creds() 
-connection = create_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
+myCreds = creds.creds() 
+myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
 
 #CRUD - Create, Read, Update and Delete
+   
+myCreds = creds.creds() 
+
+myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
+
+#Do we need show each Insert statement for each entry into datab...........?????
+
+#CRUD - Create, Read, Update and Delete
+#create a new entry into users table
+#query = "insert into sales (seller, product, quantity, price) values ('%s','%s', %d, %d)" % ('Kevin', 'Pen', 20, 3.00)
+
+#uid = 7
+#query = "delete from sales where id = %d" % (uid)
+#query = "update sales set seller= 'John' where id = %s" % (uid)
+#execute_query(myDbconnection, query)
+
+#getting information from database with Select statment 
+query = "Select * From sales"
+salesdata = execute_read_query(myDbconnection, query)
+print(salesdata)
+
+sale_person = [] 
+for i in salesdata:
+    if i['seller'] not in sale_person:
+        sale_person.append(i['seller'])
+      
+print('Available Sellers:\n')
+for i in sale_person:
+    print(i)
+
+print()
+   
+user_input = input("Enter the seller's name:")
+print()
+
+for i in sale_person:
+    if i == user_input:
+        print('Sales Report for', i,':')
+
+total = salesdata[0]['quantity'] * salesdata[0]['price']
+print()
+print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
+print()
+print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
+
+#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:')
+
+
+
+
+    #elif seller == 'Kevin':
+        #print('Sales Report for', seller)
+    #else:
+        #print('Sales Report for', seller)  
+
+#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:', total))
+
+#print('Sales Report for', user_input,':')  #need to change print string formatting review......
+
+#seller = user_input   #not sure but I know I ahve to declare variable...........????
+'''for salesman in salesdata:
+    if salesman == user_input:
+        print(sal)
+    else:
+        print('OOPs')
+       
+    print('Sales Report for', seller,':')
+    #print(seller)
+    total = seller['quantity'] * seller['price']
+    print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:', total)
+
+
+    #print(total) 
+    #query = "Select * From sales Where seller= %s" %  (sellers)
+    #john_data = execute_read_query(myDbconnection, query)
+
+
+#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:') '''
+
 
 #create a new entry into users table
-query = "insert into users(firstname, lastname, email) values ('test','testlastname','test@uh.edu')"
-execute_query(connection, query)
+#query = "Insert into sales (seller, product, quantity, price) values ('%s','%s', %d, %d)" % ('Robert', 'Plate', 10, 10.50)
 
-#additional options with create new data 
+#execute_query(myDbconnection, query)
+
+'''#additional options with create new data 
 fname = 'abc'
 lname = 'pqr'
 myemail = 'xyz@uh.edu'
@@ -44,5 +126,5 @@ execute_query(connection, query)
 
 #additional options with delete
 deletetable_query = "drop table users"
-execute_query(connection, deletetable_query)
+execute_query(connection, deletetable_query)'''
 

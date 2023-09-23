@@ -1,14 +1,15 @@
 import mysql.connector
 from mysql.connector import Error
+import creds
 
 # Use function to create a connection with the database
-def create_connection(hostname, username, passwd, dbname):
+def createDB_connection(hostname, username, passwrd, dbname):
     connection = None
     try:
         connection = mysql.connector.connect(
             host= hostname,
             user= username,
-            password= passwd,
+            password= passwrd,
             database= dbname
         )
         print('connection successful')
@@ -16,24 +17,23 @@ def create_connection(hostname, username, passwd, dbname):
         print('connection unsuccessful, error is : ', e)
     return connection
 
+
 #This function is used to execute query to update database (used for insert, update and delete statement)
-def execute_query(connectMydB, query):
-    mycursor = connectMydB.cursor()
+def execute_query(myDbconnection, query):
+    mycursor = myDbconnection.cursor()
     try:
         mycursor.execute(query)
-        connectMydB.commit()
+        myDbconnection.commit()
         print('Query successfull')
     except Error as e:
         print('Error occured is: ', e)
-
-# This function is used to execute query to retrive records from database (used for select statements to see results/report)
-def execute_read_query(connectMydB, query):
-    mycursor = connectMydB.cursor(dictionary = True)
+#This fuctiion t exexute read query and places everything in Dictionary 
+def execute_read_query(myDbconnection, query):
+    mycursor = myDbconnection.cursor(dictionary = True)
     rows = None
     try:
         mycursor.execute(query)
         rows = mycursor.fetchall()
         return rows
     except Error as e:
-        print('Error occured is : ', e)
-        
+        print('Error occured is : ', e) 
