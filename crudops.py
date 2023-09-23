@@ -29,9 +29,6 @@ myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username,
 #getting information from database with Select statment 
 query = "Select * From sales"
 salesdata = execute_read_query(myDbconnection, query)
-print(salesdata)
-
-print()
 
 sales_person = []
 for i in salesdata:
@@ -39,90 +36,36 @@ for i in salesdata:
         sales_person.append(i['seller'])
 
 print('Available Sellers:\n')
-print()
+
 
 for i in sales_person:
     print(i)
+    print()
 
 print()
 
-user_input = input("Enter the seller's name:")
+user_input = input("Enter the seller's name: ")
 print()
 
 user_row = []
 for row in salesdata:
     if row['seller'] == user_input:
         user_row.append(row)
-print(user_row)
 
-#for i in sales_person:
-    #if i == user_input:
-        #print('Sales Report for', i,':')
+#for row in range(len(user_row)):
+    #print(user_row[row])
 
-#total = salesdata[0]['quantity'] * salesdata[0]['price']
+print()
+print(f"Sales Report for {user_input}:")
+print()
 
-#print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
-#print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
+total=0
+total2 =0
+for row in user_row:
+    total = row['quantity'] * row['price']
+    total2 += total 
+    print(f"Product: {row['product']}, Quantity: {row['quantity']}, Price: {row['price']}, Total: {total}")
+    print()
 
-'''print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:')
-
-#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:', total))
-
-#print('Sales Report for', user_input,':')  #need to change print string formatting review......
-
-#seller = user_input   #not sure but I know I ahve to declare variable...........????
-for salesman in salesdata:
-    if salesman == user_input:
-        print(sal)
-    else:
-        print('OOPs')
-       
-    print('Sales Report for', seller,':')
-    #print(seller)
-    total = seller['quantity'] * seller['price']
-    print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:', total)
-
-
-    #print(total) 
-    #query = "Select * From sales Where seller= %s" %  (sellers)
-    #john_data = execute_read_query(myDbconnection, query)
-
-
-#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:') '''
-
-
-#create a new entry into users table
-#query = "Insert into sales (seller, product, quantity, price) values ('%s','%s', %d, %d)" % ('Robert', 'Plate', 10, 10.50)
-
-#execute_query(myDbconnection, query)
-
-'''#additional options with create new data 
-fname = 'abc'
-lname = 'pqr'
-myemail = 'xyz@uh.edu'
-
-query = "insert into users(firstname, lastname, email) values ('%s','%s','%s')" % (fname, lname, myemail)
-execute_query(connection, query)
-
-#read all users data in users table
-query = "select * from users"
-users = execute_read_query(connection, query)
-
-for user in users:
-    print(user['firstname'], ' ', user['lastname'])
-
-#update a user in user table
-uid = 2
-query = "update users set email='testlast@uh.edu' where id = %s" % (uid)
-
-execute_query(connection, query)
-
-#delete one user from user table
-uid = 2
-query = "delete from users where id = %s" % (uid)
-execute_query(connection, query)
-
-#additional options with delete
-deletetable_query = "drop table users"
-execute_query(connection, deletetable_query)'''
+print(f"Total Sales for {user_input}: ${total2}")  
 
