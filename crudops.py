@@ -13,10 +13,7 @@ myCreds = creds.creds()
 myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
 
 #CRUD - Create, Read, Update and Delete
-   
-myCreds = creds.creds() 
 
-myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username, myCreds.passwrd, myCreds.dataBaseName)
 
 #Do we need show each Insert statement for each entry into datab...........?????
 
@@ -24,7 +21,7 @@ myDbconnection = createDB_connection(myCreds.connectionstring, myCreds.username,
 #create a new entry into users table
 #query = "insert into sales (seller, product, quantity, price) values ('%s','%s', %d, %d)" % ('Kevin', 'Pen', 20, 3.00)
 
-#uid = 7
+#uid = 13
 #query = "delete from sales where id = %d" % (uid)
 #query = "update sales set seller= 'John' where id = %s" % (uid)
 #execute_query(myDbconnection, query)
@@ -34,46 +31,47 @@ query = "Select * From sales"
 salesdata = execute_read_query(myDbconnection, query)
 print(salesdata)
 
-sale_person = [] 
+print()
+
+sales_person = []
 for i in salesdata:
-    if i['seller'] not in sale_person:
-        sale_person.append(i['seller'])
-      
+    if i['seller'] not in sales_person:
+        sales_person.append(i['seller'])
+
 print('Available Sellers:\n')
-for i in sale_person:
+print()
+
+for i in sales_person:
     print(i)
 
 print()
-   
+
 user_input = input("Enter the seller's name:")
 print()
 
-for i in sale_person:
-    if i == user_input:
-        print('Sales Report for', i,':')
+user_row = []
+for row in salesdata:
+    if row['seller'] == user_input:
+        user_row.append(row)
+print(user_row)
 
-total = salesdata[0]['quantity'] * salesdata[0]['price']
-print()
-print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
-print()
-print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
+#for i in sales_person:
+    #if i == user_input:
+        #print('Sales Report for', i,':')
 
-#print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:')
+#total = salesdata[0]['quantity'] * salesdata[0]['price']
 
+#print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
+#print('Product:', salesdata[0]['product'], 'Quantity:', salesdata[0]['quantity'], salesdata[0]['price'], 'Total:', total)
 
-
-
-    #elif seller == 'Kevin':
-        #print('Sales Report for', seller)
-    #else:
-        #print('Sales Report for', seller)  
+'''print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:')
 
 #print('Product:', seller['product'], 'Quantity:', seller['quantity'], seller['price'], 'Total:', total))
 
 #print('Sales Report for', user_input,':')  #need to change print string formatting review......
 
 #seller = user_input   #not sure but I know I ahve to declare variable...........????
-'''for salesman in salesdata:
+for salesman in salesdata:
     if salesman == user_input:
         print(sal)
     else:
